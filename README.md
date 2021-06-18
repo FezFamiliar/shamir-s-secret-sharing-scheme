@@ -11,7 +11,10 @@ This is where [**Shamir's Secret Sharing Scheme**](https://en.wikipedia.org/wiki
 
 Let's propose the secret ```s = 832752``` and a prime```p, p > s```. We would like to divide this into ```n = 6``` parts and set the ```threshold``` value to ```k = 4```.
 
-Our first important step is the realization that our secret is basically equivalent to a co-ordinate in a 2D plane ```S``` where ```S```<sub>```x```</sub> = 0. In short, ```f(0)``` is the secret. 
+Our first important step is the realization that our secret is basically equivalent to the y co-ordinate in a 2D plane ```S``` where ```S```<sub>```x```</sub> = 0. In short, ```f(0)``` is the secret. (intersection with y-axis)
+
+<img src="/assets/secret.jpg" alt="drawing" width="200"/>
+
 
 Our secret then can be thought of, as a **[polynomial](https://en.wikipedia.org/wiki/Polynomial)** of ```k - 1```<sup>th</sup> degree, where ```f(0)``` is our secret. So our problem transposed into solving this polynomial. In fact, we don't even need to solve the entire polynomial we ought to find only ```f(0)```.  
 
