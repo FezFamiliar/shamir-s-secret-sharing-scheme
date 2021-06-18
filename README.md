@@ -11,7 +11,7 @@ This is where [**Shamir's Secret Sharing Scheme**](https://en.wikipedia.org/wiki
 
 Let's propose the secret ```s = 832752``` and a prime```p, p > s```. We would like to divide this into ```n = 6``` parts and set the ```threshold``` value to ```k = 4```.
 
-Our first important step is the realization that our secret is basically equivalent to a co-ordinate in a 2D plane ```S``` where ```S```<sub>```x```</sub> = 0.
+Our first important step is the realization that our secret is basically equivalent to a co-ordinate in a 2D plane ```S``` where ```S```<sub>```x```</sub> = 0. In short, ```f(0)``` is the secret. 
 
 Our secret then can be thought of, as a **[polynomial](https://en.wikipedia.org/wiki/Polynomial)** of ```k - 1```<sup>th</sup> degree, where ```f(0)``` is our secret. So our problem transposed into solving this polynomial. In fact, we don't even need to solve the entire polynomial we ought to find only ```f(0)```.  
 
@@ -22,27 +22,26 @@ This means that the knowledge of any ```k``` point will reconstruct the original
 First step is to generate ```k - 1``` random coefficients, lets say
 
 
-    1. a<sub>1</sub> = 154
-    1. a<sub>2</sub> = 76424
-    1. a<sub>3</sub> = 1133421
+    1. a1 = 154
+    1. a2 = 76424
+    1. a3 = 1133421
 
 
 Hence, our polynomial becomes: f(x) = 832752 + 154x + 76424x<sup>2</sup> + 1133421x<sup>3</sup>
 
 Now, we can start to produce ```n``` shares:
-1.  **463**      --> S<sub>1</sub><sup>x</sup> 
-1.  **88847**    --> S<sub>2</sub><sup>x</sup> 
-1.  **2994**     --> S<sub>3</sub><sup>x</sup> 
-1.  **345672**   --> S<sub>4</sub><sup>x</sup> 
-1.  **33342**    --> S<sub>5</sub><sup>x</sup> 
-1.  **1734**     --> S<sub>6</sub><sup>x</sup> 
-
-
+```
+1.  (463, f(463) mod p) 
+2.  (88847, f(88847) mod p)
+3.  (299, f(299) mod p) 
+4.  (345672, f(345672) mod p)
+5.  (33342, f(33342) mod p)
+6.  (1734, f(1734) mod p)
+```
 
 Respresenting graphically a **3rd** degree polynomial in a 2D plane yields the result:
 
-![secret_curve](/assets/poly.png "curve.")
-
+<img src="/assets/poly.png" alt="drawing" width="200"/>
  
 Any 2 points in a 2D plane makes it possible to draw an **infinite** number of curves but only 3 points make up a specific 2nd degree polynomial curve. You can draw an **infinite** number of curves from 3 points but only 4 points make up a specific **3rd** degree polynomial, and so on.
 
