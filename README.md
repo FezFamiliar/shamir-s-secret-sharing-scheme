@@ -22,27 +22,26 @@ This means that the knowledge of any ```k``` point will reconstruct the original
 First step is to generate ```k - 1``` random coefficients, lets say
 
 
-    1. a<sub>1</sub> = 154
-    1. a<sub>2</sub> = 76424
-    1. a<sub>3</sub> = 1133421
+    1. a1 = 154
+    1. a2 = 76424
+    1. a3 = 1133421
 
 
 Hence, our polynomial becomes: f(x) = 832752 + 154x + 76424x<sup>2</sup> + 1133421x<sup>3</sup>
 
 Now, we can start to produce ```n``` shares:
-1.  **463**      --> S<sub>1</sub><sup>x</sup> 
-1.  **88847**    --> S<sub>2</sub><sup>x</sup> 
-1.  **2994**     --> S<sub>3</sub><sup>x</sup> 
-1.  **345672**   --> S<sub>4</sub><sup>x</sup> 
-1.  **33342**    --> S<sub>5</sub><sup>x</sup> 
-1.  **1734**     --> S<sub>6</sub><sup>x</sup> 
-
-
+```
+1.  (463, f(463) mod p) 
+2.  (88847, f(88847) mod p)
+3.  (299, f(299) mod p) 
+4.  (345672, f(345672) mod p)
+5.  (33342, f(33342) mod p)
+6.  (1734, f(1734) mod p)
+```
 
 Respresenting graphically a **3rd** degree polynomial in a 2D plane yields the result:
 
-![secret_curve](/assets/poly.png "curve.")
-
+<img src="/assets/poly.png" alt="drawing" width="200"/>
  
 Any 2 points in a 2D plane makes it possible to draw an **infinite** number of curves but only 3 points make up a specific 2nd degree polynomial curve. You can draw an **infinite** number of curves from 3 points but only 4 points make up a specific **3rd** degree polynomial, and so on.
 
