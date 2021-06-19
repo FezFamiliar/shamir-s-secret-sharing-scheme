@@ -9,7 +9,7 @@ This is where [**Shamir's Secret Sharing Scheme**](https://en.wikipedia.org/wiki
 
 ## In-Depth
 
-Let's propose the secret ```s = 832752``` and a prime```p, p > s```. We would like to divide this into ```n = 6``` parts and set the ```threshold``` value to ```k = 4```.
+Let's propose the secret ```s = 832752``` and a prime```p, p > s```. We would like to divide this into ```n = 6``` parts and set the ```threshold``` value to ```k = 4```. note that ```n >= k```!
 
 Our first important step is the realization that our secret is basically equivalent to the y co-ordinate in a 2D plane ```S``` where ```S```<sub>```x```</sub> = 0. In short, ```f(0)``` is the secret. (intersection with y-axis)
 
@@ -53,7 +53,8 @@ Any 2 points in a 2D plane makes it possible to draw an **infinite** number of c
 
 These means that everything is taken ```mod p``` where p is a prime and p > S, P > n. The points are calculated as ```(x, f(x) mod p)``` and ```f(0)``` is reconstructed using [modular multiplicative inverse](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse). Please note that there are only integers and no division operation in a finite field. Also note that a multiplicative inserve ```x``` modulo ```p``` is guaranteed to exist if ```p``` is prime. For example ```110``` and ```1832``` doesn't have a multiplicative inverse. Lastly, ```-x``` modulo ```p``` is equivalent to ```x = ((x % p) + p) % p```
 
-Ultimately, any ```k``` points from the abovely generated set of ```n``` points will reconstruct the secret ```832752```
+Ultimately, any ```k``` points from the abovely generated set of ```n``` points will reconstruct the secret ```832752```, using [interpolation](https://en.wikipedia.org/wiki/Curve_fitting) 
+Observation: if ```n == k``` then every piece of the secret is required to reconstruct the original secret.
 
 ## Original Paper
 The original paper written by Adi Shamir in 1979 can be found [here.](http://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf)

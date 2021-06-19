@@ -5,8 +5,8 @@ import (
 	"time"
 	"strconv"
 	"math/rand"
-	"os"
 	"github.com/pborman/getopt"
+	"lib"
 )
 
 var exponent = map[int] string {
@@ -21,7 +21,7 @@ var exponent = map[int] string {
 	8: "x\xe2\x81\xb8",
 	9: "x\xe2\x81\xb9",
 }
-var p int = 108347
+
 
 func main () {
 
@@ -32,14 +32,20 @@ func main () {
     
     getopt.Parse()
 
-    if *secret_ptr == 0 || *threshold_ptr == 0 || *shares_ptr == 0{
-    	getopt.Usage()
-    	os.Exit(1)
-    }
-
-	secret := int(*secret_ptr)
+    secret := int(*secret_ptr)
 	n := int(*shares_ptr)
 	k := int(*threshold_ptr)
+
+
+    if secret == 0 || n == 0 || k == 0{
+    	getopt.Usage()
+    	return
+    } else if k > n {
+    	fmt.Println("Number of shares must be greater than the minimum shares required to reconstruct the secret!")
+    	return
+    }
+
+
 
 	fmt.Println("The secret is:", secret)
 	fmt.Println("Dividing into", n, "number of shares...")
@@ -68,15 +74,11 @@ func split_secret(secret, shares, threshold int) {
 
 	points := make([]int, 0)
 	points_map := map[int] int {}
-	for x := 1; x <= shares; x++ {
-		aux := rand.Intn(1000)
-		y := secret
-		for k := 0; k < threshold - 1; k++ {
-			y += coefficients[k] * exp(aux, k + 1) 
-		}
-		y %= p
+	for i := 1; i <= shares; i++ {
+		x := rand.Intn(1000)
+		y := lib.Calc_single_point(x, coefficients, threshold - 1, secret)
 		points = append(points, y)
-		points_map[aux] = y
+		points_map[x] = y
 	}
 	fmt.Println(points)
 	fmt.Println("Done!")
@@ -102,17 +104,6 @@ func split_secret(secret, shares, threshold int) {
 }
 
 
-func exp(base, exp int) int {
-
-	result := 1
-
-	for i := 1; i <= exp; i++ {
-		result *= base
-	}
-
-	return result
-}
-
 func recover(points map[int]int, threshold int, shares int) int {
 
 	fmt.Println("Please enter", threshold, "points in order to recover the secret (only the x-coordinate is needed)")
@@ -136,38 +127,6 @@ func recover(points map[int]int, threshold int, shares int) int {
 	}
 
 	fmt.Println(x_input)
-
-	reconstructed := 0
-
-	for _, k := range x_input { 
-		y := points[k]
-		pr_x := 1
-		for _, l := range x_input {
-			if l != k {
-				inv := mod_inverse(l - k, p)
-
-				pr_x *= inv % p * l % p
-			}
-		}
-		y *= pr_x % p
-		reconstructed += y
-	}
-
-	return reconstructed % p
-}
-
-
-func mod_inverse(a, p int) int {
-
-	if a < 0 {
-		a = ((a % p) + p) % p
-	}
-
-	for i := 1; i < p; i++ {
-		if ((a % p) * (i % p)) % p == 1 {
-			return i
-		}
-	}
-
-	return 0
+	return lib.Find_secret(x_input, points)
+	
 }
