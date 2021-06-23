@@ -62,7 +62,10 @@ The original paper written by Adi Shamir in 1979 can be found [here.](http://web
 
 The program accepts 3  simple arguments, ```-s, --secret``` ```-n, --shares``` and ```-k, --threshold```
 
-Example: ```go run main.go --secret 1234 -n 6 -k 3```
+Example: ```go run main.go --secret 1234 -n 6 -k 3``` or build it with ```go build main.go``` and run it after ```./main.exe --secret 1234 -n 12 -k 3```
+
+
+<img src="/assets/example.png" alt="drawing" width="1800" zoom="100"/>
   
 ## Feedback
 
