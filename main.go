@@ -119,7 +119,7 @@ func recover(points map[int]int, threshold int, shares int) int {
 		} else {
 			if k == threshold - 2 {
 				fmt.Println("1 more..")
-			} else {
+			} else if k != threshold - 1{
 				fmt.Println("Go on, don't be shy..")
 			}
 			
