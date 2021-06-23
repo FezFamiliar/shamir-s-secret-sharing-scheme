@@ -56,8 +56,7 @@ These means that everything is taken ```mod p``` where p is a prime and p > S, P
 Ultimately, any ```k``` points from the abovely generated set of ```n``` points will reconstruct the secret ```832752```, using [interpolation](https://en.wikipedia.org/wiki/Curve_fitting) 
 Observation: if ```n == k``` then every piece of the secret is required to reconstruct the original secret.
 
-## Original Paper
-The original paper written by Adi Shamir in 1979 can be found [here.](http://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf)
+
 ## Documentation
 
 The program accepts 3  simple arguments, ```-s, --secret``` ```-n, --shares``` and ```-k, --threshold```
@@ -71,6 +70,8 @@ Example: ```go run main.go --secret 1234 -n 6 -k 3``` or build it with ```go bui
 
 If you have any feedback, please reach out to me at fezfamiliar@yahoo.com
 
+## Original Paper
+The original paper written by Adi Shamir in 1979 can be found [here.](http://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf)
   
 ## License
 
